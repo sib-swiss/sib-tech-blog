@@ -26,7 +26,7 @@ You can use this tutorial with spark-shell or spark notebooks:
 
 - **spark-shell**: Download [Apache Spark](https://spark.apache.org/) and start a spark shell `$SPARK_HOME/bin/spark-shell`. 
   - By default spark uses all CPUs available in the machine. But you can use `$SPARK_HOME/bin/spark-shell master[2]` if you would like to use only 2 cores. In case you would like to run in a cluster specify the `$SPARK_HOME/bin/spark-shell spark://....`
-- **spark-notebook**: Download `spark-notebook`and start http://spark-notebook.io/ and start a new scala notebook.
+- **spark-notebook**: Download a spark-notebook version, like for example: [spark-notebook 0.7.0](https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-0.7.0-pre2-scala-2.11.7-spark-1.6.2-hadoop-2.7.3-with-hive-with-parquet.tgz?max-keys=100000) from [http://spark-notebook.io/](http://spark-notebook.io/). Extract the archive and start the notebook with the command `bin/spark-notebook`.
 
 
 # Procedure 
