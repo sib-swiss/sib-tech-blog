@@ -112,6 +112,8 @@ aaFrequency.collect
 aaFrequency.sortBy(-_._2).collect
 {% endhighlight %}
 
+![AA frequency]({{ site.url }}/sib-tech-blog/assets/aaFrequency.png)
+
 ## DataFrame and SQL
 
 {% highlight scala %}
