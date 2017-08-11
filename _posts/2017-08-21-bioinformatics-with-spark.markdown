@@ -7,8 +7,7 @@ categories: spark analytics
 
 # DRAFT DOCUMENT (NOT READY FOR PUBLISH)
 
-This tutorial shows how to analyse protein sequences and amino acids going through the basics of Apache Spark. The same can be applied to genomic data with nucletidics bases.
-Look at ADAM project for more complex examples.
+This tutorial gives an introduction to Apache Spark taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same procedure can also be applied to  genomic data with nucleotides (A,C,G,T).
 
 # Download data
 
@@ -143,6 +142,14 @@ sequences.toDF.write.partitionBy("specie").format("parquet").save("sequences.par
 {% endhighlight %}
 
 # Appendix
+
+
+### ADAM project
+ADAM is a genomics analysis platform with specialized file formats built using Apache Avro, Apache Spark and Parquet. Apache 2 licensed. 
+
+Look at [ADAM](https://github.com/bigdatagenomics/adam) project for more complex examples.
+
+
 [python-script]: #python-script
 Since from [uniprot] website we could only find fasta, we used the  [python-script][python-script] below to convert from FASTA to tsv.
 
