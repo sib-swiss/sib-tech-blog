@@ -11,9 +11,10 @@ This tutorial gives an introduction to Apache Spark taking as use case protein s
 
 # Download data
 
-The procedure is intended to be run on standalone in a laptop, but it can also be run in cluster mode as well.
-Download the [swissprot-aug-2017.tsv](ftp://swissprot) (209MB) that contains all SwissProt entries from August 2017 release. 
-
+The dataset used for this tutorial is relatively small, and corresponds to all protein sequences manually reviewed by SwissProt [swissprot-aug-2017.tsv](ftp://swissprot) (209MB). 
+The data size is good enough to teach the basics of Spark and run on standalone in a laptop.
+If you would like to play in a cluster you can also download [uniprot-aug-2017.tsv](ftp://uniprot) ....
+ 
 Each line corresponds to an entry and is shown in the following format
 {% highlight tsv %}
 Accession Gene  Specie  Sequence 
