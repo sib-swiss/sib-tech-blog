@@ -176,6 +176,13 @@ sqlContext.sql(sqlQuery).show
 //OR directly 
 df.groupBy("specie").agg(count("*") as "cnt").orderBy(desc("cnt")).limit(10).show
 
+//Or a more complex example, that also computes the average of length of the sequence
+This query sorts by the average lenght, you can see the sequence with less amino acids:
+//http://www.uniprot.org/uniprot/P84761
+
+val sqlQuery2 =
+"""val sqlQuery = "SELECT specie, count(*) as cnt, avg(length(sequence)) as avgSeqLength FROM sequences GROUP BY specie ORDER BY avgSeqLength ASC LIMIT 10"""
+
 {% endhighlight %}
 
 ## File format(s)
