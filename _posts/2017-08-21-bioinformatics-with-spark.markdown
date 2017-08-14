@@ -5,6 +5,18 @@ date:   2017-08-10 19:11:27 +0200
 categories: spark analytics
 ---
 
+<style>
+table{
+  margin: auto;
+  width: 50%;
+}
+th, td {
+	border: 1px solid lightgrey;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+</style>
+
 # DRAFT DOCUMENT (NOT READY FOR PUBLISH)
 
 This tutorial gives an introduction to Apache Spark taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same procedure can also be applied to  genomic data with nucleotides (A,C,G,T).
@@ -25,7 +37,7 @@ P01308  INS HUMAN AJBFSAKLBASFKJ
 # Setup Spark environment
 You can use this tutorial with spark-shell or spark notebooks:
 
-- **spark-shell**: Download [Apache Spark](https://spark.apache.org/) and start a spark shell `$SPARK_HOME/bin/spark-shell`. 
+- **spark-shell**: Download [Apache Spark](https://spark.apache.org/) and start a spark shell `$SPARK_HOME/bin/spark-shell --driver-memory 2G`. 
   - By default spark uses all CPUs available in the machine. But you can use `$SPARK_HOME/bin/spark-shell master[2]` if you would like to use only 2 cores. In case you would like to run in a cluster specify the `$SPARK_HOME/bin/spark-shell spark://....`
 - **spark-notebook**: Download a spark-notebook version, like for example: [spark-notebook 0.7.0](https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-0.7.0-pre2-scala-2.11.7-spark-1.6.2-hadoop-2.7.3-with-hive-with-parquet.tgz?max-keys=100000) from [http://spark-notebook.io/](http://spark-notebook.io/). Extract the archive and start the notebook with the command `./bin/spark-notebook` and access the interface at [http://localhost:9001/](http://localhost:9001/).
 
@@ -69,48 +81,71 @@ def readLine(line: String) = {
 
 ## Transformations and actions
 
-In Spark there are 2 concepts. Transformations and actions.
+In Spark there are two type of operations: Transformations and actions.
 
+- Transformations (transform) create a new RDD from an existing one. They are **lazily executed** ! (They are executed on demand)
+
+- An action will return a non-RDD type. Actions triggers execution and usually CPU time.
+
+<br>
+
+| Transformations | Actions |
+|-----------------|---------|
+| map             | first, take    |
+| filter          | collect |
+| distinct        | count   |
+| ...      | ...   |
+
+<br>
+Let's see some examples:
 
 {% highlight scala %}
-//This is a transfromation that tells how the lines should be read (nothing is executed)
+//In this case map tells how each line should be mapped / transformed (nothing is actually executed)
 val sequences = data.map(readLine)
 
-//Do we need this? sequences.take(1)
-//sequences.cache //Check if enough memory! 
+//Shows first accession or specie (this is an action, but does not require to read the whole file)
+sequences.first
+sequences.first.getClass //Notice that this is a class and not an RDD
 
-//Shows first accession (this is an action, but only first row access)
 sequences.first.accession
-/* sysout: String = Q6GZX4 */
 sequences.first.specie
 
-sequences.distinct species
+//If you have initialized the spark-shell with 2G you may be able to store the result in cache (big difference with Hadoop)
+sequences.cache
+
+//See how many different species we have
+sequences.map(s => s.specie).distinct().count
+
+//See the top curated species
+sequences.map(s => (s.specie, 1)).reduceByKey(_ + _).sortBy(-_._2).take(10).foreach(println)
 
 // This is an action, but all rows must be accessed, because file is not indexed yet.
 val humanSequences = sequences.filter(s=> s.specie.equals("HUMAN"))
-
 //Count the number of human sequences
 humanSequences.count
-/* sysout: Long = 20214 */
+
+//Sequences containing the 'DANIEL' sequence 
+val sequencesContainingPattern = sequences.filter(s=> s.sequence.contains("DANIEL")).count
+
+//Use any function (alignment, GC content, ..... ) 
+val result = sequences.map(ANY_FUNCTION_HERE)
+
 {% endhighlight %}
 
+## Spark notebook
 
-You will note that this operation also goes pretty fast, this is because only the first line is actually read and not the all file!
-
-## Cache flatMap and reduceByKey
+Spark notebooks offer the possibilty to visualize directly results in a chart.
 
 {% highlight scala %}
-humanSequences.cache
-
-//Show how many entries are here (Job is dispatched!!)
-humanSequences.count
-
 //Show histogram by specie (note the L to make sure we are using Longs instead of Integers here!)
-val aaFrequency = humanSequences.flatMap(s=> s.sequence.toList).map(aa => (aa, 1L)).reduceByKey(_ + _)
 
-//Sort
+//Transformations
+val sequences = data.map(readLine)
+val humanSequences = sequences.filter(s=> s.specie.equals("HUMAN"))
+val aaFrequency = humanSequences.flatMap(s=> s.sequence.toList).map(aa => (aa, 1L)).reduceByKey(_ + _).sortBy(-_._2)
+
+//Actions
 aaFrequency.collect
-aaFrequency.sortBy(-_._2).collect
 {% endhighlight %}
 
 ![AA frequency]({{ site.url }}/sib-tech-blog/assets/aaFrequency.png)
@@ -123,8 +158,25 @@ aaFrequency.sortBy(-_._2).collect
 val sqlContext = new org.apache.spark.sql.SQLContext(sc)
 import sqlContext.implicits._
 
-{% endhighlight %}
+val df = sequences.toDF
+df.show
+// Print the schema in a tree format (you can imagine nested classes inside sequence)
+df.printSchema()
 
+df.createOrReplaceTempView("sequences")
+
+val sqlQuery = """SELECT specie, count(*) as cnt 
+FROM sequences 
+GROUP BY specie 
+ORDER BY cnt DESC 
+LIMIT 10"""
+
+sqlContext.sql(sqlQuery).show
+
+//OR directly 
+df.groupBy("specie").agg(count("*") as "cnt").orderBy(desc("cnt")).limit(10).show
+
+{% endhighlight %}
 
 ## File format(s)
 Avro and Parquet
