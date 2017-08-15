@@ -23,11 +23,11 @@ This tutorial gives an introduction to Apache Spark taking as use case protein s
 
 # Download data
 
-The dataset used for this tutorial corresponds to all protein sequences manually reviewed by SwissProt until August 2017 [swissprot-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/swissprot-aug-2017.tsv.gz) (66.0 MB compressed, 200 MB uncompressed, 555'100 sequences or lines). 
+The dataset used for this tutorial corresponds to all protein sequences manually reviewed by SwissProt until August 2017 [swissprot-aug-2017.tsv.gz](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/swissprot-aug-2017.tsv.gz) (66.0 MB compressed, 200 MB uncompressed, 555'100 sequences or lines). 
 This data corresponds to the [Swiss-Prot](http://www.uniprot.org/uniprot/?query=*&fil=reviewed%3Ayes) data (protein sequences manually reviewed by curators).
 The data size is good enough to teach the basics of Spark and run on a laptop in standalone.
 
-There is also a more challenging dataset to run / benchmark on a cluster, that can be downloaded through this link [uniprot-trembl-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/uniprot-trembl-aug-2017.tsv.gz) (16.7GB compressed, 29.7GB uncompressed, 88'032'926 sequences or lines). This data corresponds to the [TrEMBL](http://www.uniprot.org/uniprot/?query=*&fil=reviewed%3Ano) data that was not reviewed by curators.
+There is also a more challenging dataset to run / benchmark on a cluster, that can be downloaded through this link [uniprot-trembl-aug-2017.tsv.gz](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/uniprot-trembl-aug-2017.tsv.gz) (16.7GB compressed, 29.7GB uncompressed, 88'032'926 sequences or lines). This data corresponds to the [TrEMBL](http://www.uniprot.org/uniprot/?query=*&fil=reviewed%3Ano) data that was not reviewed by curators.
 
 Each line corresponds to an entry and is shown in the following format
 {% highlight tsv %}
