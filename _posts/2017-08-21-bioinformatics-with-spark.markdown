@@ -23,11 +23,12 @@ This tutorial gives an introduction to Apache Spark taking as use case protein s
 
 # Download data
 
-The dataset used for this tutorial corresponds to all protein sequences manually reviewed by SwissProt until August 2017 [swissprot-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/swissprot-aug-2017.tsv) (200MB or 555'100 sequences / lines). 
+The dataset used for this tutorial corresponds to all protein sequences manually reviewed by SwissProt until August 2017 [swissprot-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/swissprot-aug-2017.tsv.gz) (66.0 MB compressed, 200 MB uncompressed, 555'100 sequences or lines). 
+This data corresponds to the [Swiss-Prot](http://www.uniprot.org/uniprot/?query=*&fil=reviewed%3Ayes) data (protein sequences manually reviewed by curators).
 The data size is good enough to teach the basics of Spark and run on a laptop in standalone.
 
-If you would like a more challenging dataset to run / benchmark on a cluster you can also download [uniprot-trembl-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/uniprot-trembl-aug-2017.tsv) (29.7GB or 88'032'926 sequences / lines)....
- 
+There is also a more challenging dataset to run / benchmark on a cluster, that can be downloaded through this link [uniprot-trembl-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/uniprot-trembl-aug-2017.tsv.gz) (16.7GB compressed, 29.7GB uncompressed, 88'032'926 sequences or lines). This data corresponds to the [TrEMBL](http://www.uniprot.org/uniprot/?query=*&fil=reviewed%3Ano) data that was not reviewed by curators.
+
 Each line corresponds to an entry and is shown in the following format
 {% highlight tsv %}
 Accession Gene  Specie  Sequence 
@@ -151,7 +152,7 @@ val sequences = data.map(readLine)
 val humanSequences = sequences.filter(s=> s.specie.equals("HUMAN"))
 val aaFrequency = humanSequences.flatMap(s=> s.sequence.toList).map(aa => (aa, 1L)).reduceByKey(_ + _).sortBy(-_._2)
 
-//Actions
+//The collect or take action will trigger the chart
 aaFrequency.collect
 {% endhighlight %}
 
