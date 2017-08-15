@@ -130,6 +130,16 @@ val sequencesContainingPattern = sequences.filter(s=> s.sequence.contains("DANIE
 //Use any function (alignment, GC content, ..... ) 
 val result = sequences.map(ANY_FUNCTION_HERE)
 
+//example of custom functions
+//Need to add --packages at the end (corresponding to Java/Scala artifact. Downloaded by sbt automatically and deployed to worker nodes.
+ $SPARK_HOME/bin/spark-shell --master spark://$master_hostname:7077 --packages "com.fulcrumgenomics:fgbio_2.11:0.2.0"
+
+import com.fulcrumgenomics.alignment.NeedlemanWunschAligner
+
+ val seqToAlign = "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCD"
+
+humanSequences.map(s=> (s.accession, NeedlemanWunschAligner(1, -1, -3, -1).align(seqToAlign, s.sequence).score)).sortBy(-_._2).take(10).foreach(println)
+
 {% endhighlight %}
 
 ## Spark notebook
@@ -137,9 +147,6 @@ val result = sequences.map(ANY_FUNCTION_HERE)
 Spark notebooks offer the possibilty to visualize directly results in a chart.
 
 {% highlight scala %}
-//Show histogram by specie (note the L to make sure we are using Longs instead of Integers here!)
-
-//Transformations
 val sequences = data.map(readLine)
 val humanSequences = sequences.filter(s=> s.specie.equals("HUMAN"))
 val aaFrequency = humanSequences.flatMap(s=> s.sequence.toList).map(aa => (aa, 1L)).reduceByKey(_ + _).sortBy(-_._2)
@@ -209,7 +216,6 @@ sequences.toDF.write.partitionBy("specie").format("parquet").save("sequences.par
 ADAM is a genomics analysis platform with specialized file formats built using Apache Avro, Apache Spark and Parquet. Apache 2 licensed. 
 
 Look at [ADAM](https://github.com/bigdatagenomics/adam) project for more complex examples.
-
 
 [python-script]: #python-script
 Since from [uniprot] website we could only find fasta, we used the  [python-script][python-script] below to convert from FASTA to tsv.
