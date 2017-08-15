@@ -21,7 +21,7 @@ th, td {
 
 This tutorial gives an introduction to Apache Spark taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same procedure can also be applied to  genomic data with nucleotides (A,C,G,T).
 
-# Download data
+# Download the dataset
 
 The dataset used for this tutorial corresponds to all [Swiss-Prot](http://www.uniprot.org/uniprot/?query=*&fil=reviewed%3Ayes) sequences manually reviewed by curators until August 2017 [swissprot-aug-2017.tsv.gz](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/swissprot-aug-2017.tsv.gz) (66.0 MB compressed, 200 MB uncompressed, 555'100 sequences or lines). 
 The data size is good enough to teach the basics of Apache Spark and run on a laptop in standalone mode.
