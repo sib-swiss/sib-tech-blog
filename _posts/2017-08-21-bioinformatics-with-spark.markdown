@@ -23,10 +23,10 @@ This tutorial gives an introduction to Apache Spark taking as use case protein s
 
 # Download data
 
-The dataset used for this tutorial corresponds to all protein sequences manually reviewed by SwissProt until August 2017 [swissprot-aug-2017.tsv](ftp://swissprot) (209MB). 
+The dataset used for this tutorial corresponds to all protein sequences manually reviewed by SwissProt until August 2017 [swissprot-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/swissprot-aug-2017.tsv) (200MB or 555'100 sequences / lines). 
 The data size is good enough to teach the basics of Spark and run on a laptop in standalone.
 
-If you would like a more challenging dataset to run / benchmark on a cluster you can also download [uniprot-aug-2017.tsv](ftp://uniprot) which corresponds to ....
+If you would like a more challenging dataset to run / benchmark on a cluster you can also download [uniprot-trembl-aug-2017.tsv](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/uniprot-trembl-aug-2017.tsv) (29.7GB or 88'032'926 sequences / lines)....
  
 Each line corresponds to an entry and is shown in the following format
 {% highlight tsv %}
