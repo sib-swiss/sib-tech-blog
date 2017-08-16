@@ -39,7 +39,7 @@ This tutorial can be followed, either with the spark-shell (recommended way) or 
 
 - **spark-shell**: [Download Apache Spark](https://spark.apache.org/downloads.html) (requires to install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)). Start a spark shell with 2GB of memory `$SPARK_HOME/bin/spark-shell --driver-memory 2G`. 
   - By default Spark uses all CPUs available in the machine, but can be modified with the option --master local[n] option. Example  `$SPARK_HOME/bin/spark-shell --master local[2]` will only use 2 cores. In case of using a cluster, the spark-shell can be initialized like this: `$SPARK_HOME/bin/spark-shell --executor-memory 4G --master spark://$master_hostname:7077`
-- **spark-notebook**: Download a spark-notebook version, like for example: [spark-notebook 0.7.0](https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-0.7.0-pre2-scala-2.11.7-spark-1.6.2-hadoop-2.7.3-with-hive-with-parquet.tgz?max-keys=100000) from [http://spark-notebook.io/](http://spark-notebook.io/). Extract the archive and start the notebook with the command `./bin/spark-notebook` and access the interface at [http://localhost:9001/](http://localhost:9001/).
+- **spark-notebook**: Download a spark-notebook version, like for example: [spark-notebook 0.7.0](https://s3.eu-central-1.amazonaws.com/spark-notebook/tgz/spark-notebook-0.7.0-pre2-scala-2.11.7-spark-1.6.2-hadoop-2.7.3-with-hive-with-parquet.tgz?max-keys=100000) from [http://spark-notebook.io/](http://spark-notebook.io/). Extract the archive and start the notebook with the command `./bin/spark-notebook`. Access the interface at [http://localhost:9001/](http://localhost:9001/).
 
 # Procedure 
 
