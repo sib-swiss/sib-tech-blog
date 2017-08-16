@@ -1,3 +1,5 @@
+metastore_db
+derby.log
 _site
 .sass-cache
 .jekyll-metadata

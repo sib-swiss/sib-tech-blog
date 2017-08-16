@@ -48,8 +48,11 @@ You can use this tutorial with spark-shell or spark notebooks:
 
 {% highlight scala %}
 //Read data first
-val data = sc.textFile("swissprot.tsv")
-/**data: org.apache.spark.rdd.RDD[String] = swissprot.tsv MapPartitionsRDD[36] at textFile...**/
+val data = sc.textFile("swissprot-aug-2017.tsv")
+
+//Or if working with gz file
+//val data = sc.textFile("swissprot-aug-2017.tsv.gz")
+
 {% endhighlight %}
 
 Data can be read from directory using wildcards and can even compressed. For example you can write `sc.textFile("apache-logs/**/*.gz")`. You can also read from HDFS, ...
@@ -67,7 +70,7 @@ If you get an error message that says "Input path does not exist:" then you migh
 
 ## Classes and functions
 
-Even though we can use anonymous functions in lambda, it is easier to understand the code if we use functions and classes.
+Even if it is possible to do complex tasks in a purely functional manner and anonymous functions / lambdas. It is a good practice to define functions and classes to understand better the code.
 
 {% highlight scala %}
 //Defines a class to represent the data in TSV 
@@ -131,7 +134,40 @@ val sequencesContainingPattern = sequences.filter(s=> s.sequence.contains("DANIE
 //Use any function (alignment, GC content, ..... ) 
 val result = sequences.map(ANY_FUNCTION_HERE)
 
-//example of custom functions
+example of custom functions
+
+{% endhighlight %}
+
+## More complex operations
+Scala objects can also be sent on the workers, as long as they are serializable
+
+{% highlight scala %}
+object Enzyme extends java.io.Serializable {
+  //Suppose recognizes the portion of the following sequence
+  val cleavageSite = """[ASD]{3,5}[LI][^P]{2,5}""".r
+  def matchSite(seq: String): Boolean = cleavageSite.findFirstIn(seq).isDefined
+}
+
+//Returns all sequences that the enzyme will recognize
+sequences.filter(s => Enzyme.matchSite(s.sequence)).count
+
+//Another example with sorting
+object PrositePatterns extends java.io.Serializable {
+  val barwinSignature = """CG[KR]CL.V.N""".r
+  val nglycoPattern = """N[^P][ST][^P]""".r
+  def countNGlycoSites (seq: String) : Integer = nglycoPattern.findAllIn(seq).length
+}
+
+//Returns sequences that have more than 100 N-glycosylation sites predicted (this prediction returns many false positives)
+sequences.map(s => (s.accession, s.geneName, PrositePatterns.countNGlycoSites(s.sequence))).filter(r => r._3 > 100).sortBy(-_._3).take(10)
+
+{% endhighlight %}
+
+## External dependencies
+Also any artifact / jar can be added in the spark context. The spark-shell need to be initialized with --package, and jars will be sent over the network to the workers
+
+{% highlight scala %}
+
 //Need to add --packages at the end (corresponding to Java/Scala artifact. Downloaded by sbt automatically and deployed to worker nodes.
  $SPARK_HOME/bin/spark-shell --master spark://$master_hostname:7077 --packages "com.fulcrumgenomics:fgbio_2.11:0.2.0"
 
