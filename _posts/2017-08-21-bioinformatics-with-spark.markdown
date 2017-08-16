@@ -64,7 +64,7 @@ val data = sc.textFile("swissprot-aug-2017.tsv.gz")
 Data can be read from directory using wildcards and can even be compressed. For example this is a valid path: `sc.textFile("apache-logs/**/*.gz")`. It supports HDFS and other file system, ...
 
 Note that this operation goes pretty fast and it will even work if the file is not present. If you run on a cluster the file must be accessed by all workers using the same path.
-To make sure we have placed the file in the correct directory, we will show the first line: 
+To make sure the file is placed in the correct directory, we can ask to show the first line: 
 
 {% highlight scala %}
 //Shows the first line
