@@ -294,11 +294,11 @@ ADAM is a genomics analysis platform with specialized file formats built using A
 
 Look at [ADAM](https://github.com/bigdatagenomics/adam) project for more complex examples.
 
-[python-script]: #python-script
+#### FASTA to TSV converter in python
+
 The [python-script][python-script] below was used to convert UniProt FASTA files to TSV format for a better understanding of this tutorial.
 
-<a name="python-script"></a>
-#### FASTA to TSV converter in python
+
 {% highlight python %}
 import sys
 from Bio import SeqIO
