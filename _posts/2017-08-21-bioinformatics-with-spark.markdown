@@ -296,8 +296,7 @@ Look at [ADAM](https://github.com/bigdatagenomics/adam) project for more complex
 
 #### FASTA to TSV converter in python
 
-The [python-script][python-script] below was used to convert UniProt FASTA files to TSV format for a better understanding of this tutorial.
-
+The python-script below was used to convert UniProt FASTA files to TSV format to make the data easier to process in this tutorial.
 
 {% highlight python %}
 import sys
