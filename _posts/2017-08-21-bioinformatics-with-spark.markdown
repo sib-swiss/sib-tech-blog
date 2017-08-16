@@ -18,8 +18,6 @@ th, td {
 }
 </style>
 
-# DRAFT DOCUMENT (NOT READY FOR PUBLISH)
-
 This tutorial gives an introduction to Apache Spark taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same operations can also be applied to genomic data with nucleotides (A,C,G,T).
 
 # Download the dataset
