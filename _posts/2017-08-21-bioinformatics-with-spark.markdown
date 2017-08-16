@@ -28,7 +28,7 @@ The data size is good enough to teach the basics of Apache Spark and run on a la
 
 There is also a more challenging dataset, that can be downloaded through this link: [uniprot-trembl-aug-2017.tsv.gz](ftp://ftp.vital-it.ch/tools/sib-tech-blog/spark-for-bioinformatics/uniprot-trembl-aug-2017.tsv.gz) (16.7GB compressed, 29.7GB uncompressed, 88'032'926 sequences or lines). This data corresponds to the [TrEMBL](http://www.uniprot.org/uniprot/?query=*&fil=reviewed%3Ano) / automatic sequences that were not reviewed by curators until August 2017.
 
-Each line corresponds to a protein sequence and the columns are ordered as follows:
+Once uncompressed, you can see that each line corresponds to a protein sequence and the columns are ordered as follows:
 {% highlight tsv %}
 accession   geneName  specie  sequence 
 P01308	    INS	      HUMAN   MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN
