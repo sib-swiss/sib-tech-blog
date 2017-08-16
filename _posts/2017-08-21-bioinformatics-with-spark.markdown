@@ -18,7 +18,7 @@ th, td {
 }
 </style>
 
-This tutorial gives an introduction to Apache Spark in (scala)[https://www.scala-lang.org/] taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same operations can also be applied to genomic data with nucleotides (A,C,G,T).
+This tutorial gives an introduction to Apache Spark in [scala](https://www.scala-lang.org/) taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same operations can also be applied to genomic data with nucleotides (A,C,G,T).
 
 # Download the dataset
 
