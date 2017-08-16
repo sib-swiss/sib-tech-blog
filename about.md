@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-This is website contains a series of tutorial that were presented in devforums and considered publicaly of interest for the bioinformatics community.
+This blog is intented to share technical knowledge between SIB members and among bioinformaticians community.
 
-You can find more about the SIB Swiss Instiute of Bioinformatics in this website:
+More information about SIB Swiss Instiute of Bioinformatics can be found in here:
 (www.sib.swiss)[http://sib.swiss] 
