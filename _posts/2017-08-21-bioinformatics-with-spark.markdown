@@ -52,7 +52,7 @@ Resilient Distributed Dataset (RDD) are a collection of elements partitioned acr
 - RDD can be created either by parallelize or from reading a datasource (fileystem, cassandra, hbase, hdfs, amazon s3…)
 
 {% highlight scala %}
-//Read data first
+//Read data first (you need to uncompress the file in this case)
 val data = sc.textFile("swissprot-aug-2017.tsv")
 //data: org.apache.spark.rdd.RDD[String] = ...
 
