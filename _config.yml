@@ -16,7 +16,7 @@
 title: SIB Tech Blog
 #email: sib-technolgy@sib.swiss
 description: > # this means to ignore newlines until "baseurl:"
-  This website is intented to share technical knowledge between SIB members and among bioinformaticians community.
+  This blog is intented to share technical knowledge between SIB members and among bioinformaticians community.
 baseurl: "/sib-tech-blog" # the subpath of your site, e.g. /blog
 url: "https://sib-swiss.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: ISBSIB
