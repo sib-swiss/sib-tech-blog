@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tutorial on Spark for Bioinformatics"
-date:   2017-08-10 19:11:27 +0200
+date:   2017-08-21 12:00:00 +0200
 categories: spark analytics
 ---
 
