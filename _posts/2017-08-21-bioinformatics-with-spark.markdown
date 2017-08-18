@@ -153,10 +153,12 @@ object Enzyme extends java.io.Serializable {
 
 //Searches for all sequences that the enzyme will recognize
 sequences.filter(s => Enzyme.matchSite(s.sequence)).count
+{% endhighlight %}
+
+{% highlight scala %}
 
 //Another example with sorting
 object PrositePatterns extends java.io.Serializable {
-  val barwinSignature = """CG[KR]CL.V.N""".r
   //Glycosylation prosite pattern
   val nglycoPattern = """N[^P][ST][^P]""".r
   def countNGlycoSites (seq: String) : Integer = nglycoPattern.findAllIn(seq).length
@@ -164,6 +166,33 @@ object PrositePatterns extends java.io.Serializable {
 
 //Returns sequences that have more than 100 N-glycosylation sites predicted (this prediction returns many false positives)
 sequences.map(s => (s.accession, s.geneName, PrositePatterns.countNGlycoSites(s.sequence))).filter(r => r._3 > 100).sortBy(-_._3).take(10)
+
+{% endhighlight %}
+
+#### Example of Trypsin peptide cuts
+The Trypsin is an enzyme used in mass spectometry to identify peptides. It cuts the proteins after an Arginine or a Lysine, but not if it is followed by a Proline.
+This code shows, how to find the top 10 biggest peptides cut by this enzyme for all given sequences.
+It also shows how to compute the frequency by peptide length (spectrum)
+
+{% highlight scala %}
+
+case class Peptide (accession: String, startPosition: Integer, length: Integer)
+
+object Trypsin extends java.io.Serializable{
+  //The trypsin cuts just after Arginine (R) or Lysine (K), but not with a Proline (P) after
+  val pattern = """(?!P)(?<=[RK])""".r
+  def cut (accession: String, sequence: String) : List[Peptide] = {
+    val startPositions : List[Int] = List(0) ++ pattern.findAllMatchIn(sequence).map(_.start).toList ++ List(sequence.length)
+    startPositions.sliding(2).map(l => Peptide(accession, l(0) + 1, l(1)-l(0))).toList
+  }
+}
+
+//Check the top 10 biggest peptides for human sequences
+humanSequences.flatMap(s => Trypsin.cut(s.accession, s.sequence)).sortBy(s => -s.length).take(10)
+
+//Draw peptide frequency by peptide length
+humanSequences.flatMap(s => Trypsin.cut(s.accession, s.sequence)).map(pep => pep.length).countByValue.toList.sortBy(_._1).foreach(p => println(p._1 + "\t" + p._2 ))
+
 
 {% endhighlight %}
 
