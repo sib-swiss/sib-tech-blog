@@ -1,5 +1,5 @@
 # Run the website
-This website is intented to share technical knowledge between [SIB](http://www.sib.swiss/) members and among the bioinformaticians community in general.
+This website is intented to share technical knowledge between [SIB](http://www.sib.swiss/) members and among the bioinformatics community in general.
 
 https://sib-swiss.github.io/sib-tech-blog/
 
