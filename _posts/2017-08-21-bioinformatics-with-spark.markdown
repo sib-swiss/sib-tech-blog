@@ -90,7 +90,7 @@ def readLine(line: String) = {
 
 ## Transformations and actions
 
-In Spark there are two type of operations: **Transformations** and **actions**.
+In Spark there are two types of operations: **Transformations** and **actions**.
 
 - A **transformation** (transforms) creates a new RDD from an existing one. They are **lazy evaluated**: They are executed on demand, and therefore are CPU friendly.
 
