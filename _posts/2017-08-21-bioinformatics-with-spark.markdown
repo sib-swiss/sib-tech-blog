@@ -18,7 +18,7 @@ th, td {
 }
 </style>
 
-This tutorial gives an introduction to [Apache Spark](https://spark.apache.org/) in [scala](https://www.scala-lang.org/) taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same exercises can also be done with genomic data using nucleotides (A,C,G,T) and the code can be adapted to Python, Java or R.
+This tutorial gives an introduction to [Apache Spark](https://spark.apache.org/) in [Scala](https://www.scala-lang.org/) taking as use case protein sequences and amino acids, commonly used in  bioinformatics. The same exercises can also be done with genomic data using nucleotides (A,C,G,T) and the code can be adapted to Python, Java or R.
 
 # Download the dataset
 
@@ -197,7 +197,7 @@ humanSequences.flatMap(s => Trypsin.cut(s.accession, s.sequence)).map(pep => pep
 {% endhighlight %}
 
 ## External dependencies
-Any artifact / jar can be added to the spark context. The spark-shell need to be initialized with --package, and jars will be sent over the network to the workers
+Any artifact / jar can be added to the spark context. The spark-shell needs to be initialized with --package, and jars will be sent over the network to the workers
 
 {% highlight scala %}
 
@@ -257,7 +257,7 @@ ORDER BY avgSeqLength ASC LIMIT 10"""
 {% endhighlight %}
 
 ## Big data file formats
-[Avro](https://avro.apache.org/) and [Parquet](https://parquet.apache.org/) are one of the most used file formats in the Big Data ecosystem.
+[Avro](https://avro.apache.org/) and [Parquet](https://parquet.apache.org/) are some of the most used file formats in the Big Data ecosystem.
 [Parquet](https://parquet.apache.org/) is a column storage format and is particularly interesting because:
 
 - It eliminates I/O for columns that are not part of query. 
@@ -325,7 +325,7 @@ Look at [ADAM](https://github.com/bigdatagenomics/adam) project for more complex
 
 #### FASTA to TSV converter in python
 
-The python-script below was used to convert UniProt FASTA files to TSV format.
+The Python script below was used to convert UniProt FASTA files to TSV format.
 
 {% highlight python %}
 import sys
