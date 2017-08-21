@@ -342,4 +342,4 @@ for seq_record in SeqIO.parse(fasta_file, "fasta"):
 [jekyll-talk]: https://talk.jekyllrb.com/
 
 This post was written by Daniel Teixeira. 
-If you have any suggestions for improvements you can <a href="http://www.sib.swiss/people/Daniel.Teixeira"> contact him </a> and will be happy to chat with you. If you find a typo / bug don't hesitate to submit a <a href="https://github.com/sib-swiss/sib-tech-blog/edit/gh-pages/_posts/2017-08-21-bioinformatics-with-spark.markdown">pull request</a>.
+If you have any suggestions for improvements don't hesitate to <a href="http://www.sib.swiss/people/Daniel.Teixeira"> contact him </a>. If you find a typo / bug don't hesitate to submit a <a href="https://github.com/sib-swiss/sib-tech-blog/edit/gh-pages/_posts/2017-08-21-bioinformatics-with-spark.markdown">pull request</a>.
