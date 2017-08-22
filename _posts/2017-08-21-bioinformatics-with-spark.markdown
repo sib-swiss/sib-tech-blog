@@ -34,6 +34,9 @@ accession   geneName  specie  sequence
 P01308	    INS	      HUMAN   MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN
 {% endhighlight %}
 
+
+**Note**: To make the examples more readable, we use Swiss-Prot organism mnemonics to represent and we named it _specie_ (instead of species). For a real analysis of species, you should use the taxon identifiers instead.
+
 # Setup Spark environment
 This tutorial can be followed, either with the spark-shell (recommended way) or spark-notebooks:
 
