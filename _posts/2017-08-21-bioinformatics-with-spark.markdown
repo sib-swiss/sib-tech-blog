@@ -249,7 +249,7 @@ sqlContext.sql(sqlQuery).show
 df.groupBy("specie").agg(count("*") as "cnt").orderBy(desc("cnt")).limit(10).show
 
 //Or a more complex example, that also computes the average of length of the sequence
-This query sorts by the average lenght, you can see the sequence with less amino acids:
+//This query sorts by the average length, you can see the sequence with less amino acids:
 //http://www.uniprot.org/uniprot/P84761
 
 val sqlQuery2 = """SELECT specie, count(*) as cnt, avg(length(sequence)) as avgSeqLength 
@@ -270,7 +270,7 @@ ORDER BY avgSeqLength ASC LIMIT 10"""
 {% highlight scala %}
 //TSV file: swissprot-aug-2017.tsv (200MB)
 //Compressed file: swissprot-aug-2017.tsv.gz (66MB)
-//Let's see how much space, is the equivalent in Parquet
+//Let's see how much space is the equivalent in Parquet
 val data = sc.textFile("swissprot-aug-2017.tsv")
 case class Sequence(accession: String, geneName: String, specie: String, sequence: String)
 def readLine(line: String) = {
